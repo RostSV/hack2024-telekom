@@ -1,1 +1,25 @@
-<p>chat-page works!</p>
+<app-logo></app-logo>
+<main class="chat-container">
+  <section class="chat-window">
+    <header><h1 class="chat-title">Chat</h1></header>
+    <article class="content">
+      <article class="message-group">
+        <div class="assistant-message">
+          <span class="avatar assistant">J</span>
+          <p class="message-text">So your file looks good. Do you need any other help?</p>
+        </div>
+      </article>
+      <form class="message-input" role="form">
+        <label for="messageInput" class="visually-hidden">Type your message</label>
+        <input
+          type="text"
+          id="messageInput"
+          class="input-field"
+          placeholder="Tell me..."
+          aria-label="Type your message"
+        />
+        <button type="submit" class="send-button" aria-label="Send message"></button>
+      </form>
+    </article>
+  </section>
+</main>
