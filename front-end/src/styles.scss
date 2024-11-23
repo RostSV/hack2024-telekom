@@ -1,1 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+.app-root{
+  width: 60%;
+  max-width: 900px
+}
+
+body{
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../src/assets/bg.jpeg");
+  background-size: cover;
+  position: fixed;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.header-component{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top:30px;
+
+  .brand-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .brand-title {
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    max-width: 181px;
+    color: rgb(43, 47, 50);
+    white-space: nowrap;
+    font: 700 48px Lexend, sans-serif;
+    margin: 0;
+  }
+
+  .info-container {
+    border-radius: 0;
+    display: flex;
+    max-width: 130px;
+    flex-direction: column;
+    color: rgb(43, 47, 50);
+    white-space: nowrap;
+    font: 400 24px Lexend, sans-serif;
+  }
+  .info-content {
+    border-radius: 10px;
+    background: rgb(245, 240, 240);
+    display: flex;
+    gap: 15px;
+    padding: 7px 15px;
+    align-items: center;
+  }
+  .info-icon {
+    aspect-ratio: 1;
+    object-fit: contain;
+    object-position: center;
+    width: 30px;
+  }
+  .info-text {
+    margin: 0;
+  }
+}
+
+
