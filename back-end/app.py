@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.responses import JSONResponse
 from uuid import uuid4
 import os
@@ -17,34 +17,41 @@ def read_root():
     return {"message": "Welcome to the FastAPI ChatGPT Backend!"}
 
 @app.post("/compare")
-async def compare_files(file1: UploadFile = File(...), file2: UploadFile = File(...)):
+async def compare_files(
+        task: str = Form(...),
+        file1: UploadFile = File(None),
+        file2: UploadFile = File(None)
+):
     """
-    Endpoint to compare two PDF files, return differences and improvement suggestions.
-    Accepts two files: 'file1' (example file), 'file2' (file to compare).
+    Endpoint to compare two PDF files or process a single PDF with a task.
+    Accepts a task and up to two files: 'file1' (example file), 'file2' (file to compare).
     """
-    # Ensure both files are PDFs
-    if file1.content_type != 'application/pdf' or file2.content_type != 'application/pdf':
-        raise HTTPException(status_code=400, detail="Both files must be PDFs.")
+    if not file1 and not file2 and not task:
+        raise HTTPException(status_code=400, detail="At least one file or task text must be provided.")
 
     # Generate unique filenames for the uploaded files
-    file1_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file1.filename}")
-    file2_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file2.filename}")
+    file1_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file1.filename}") if file1 else None
+    file2_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file2.filename}") if file2 else None
 
     try:
         # Save the uploaded files to the server
-        save_uploaded_file(await file1.read(), file1_path)
-        save_uploaded_file(await file2.read(), file2_path)
+        if file1:
+            save_uploaded_file(await file1.read(), file1_path)
+        if file2:
+            save_uploaded_file(await file2.read(), file2_path)
 
-        # Extract text from both PDFs using pdfplumber
-        text1 = extract_text_from_pdf(file1_path)
-        text2 = extract_text_from_pdf(file2_path)
+        # Extract text from the PDFs using pdfplumber
+        text1 = extract_text_from_pdf(file1_path) if file1 else ""
+        text2 = extract_text_from_pdf(file2_path) if file2 else ""
 
-        # Use ChatGPT to analyze the differences and suggest improvements
-        analysis_result = compare_with_gpt(text1, text2)
+        # Use ChatGPT to analyze the task and the provided PDFs
+        analysis_result = compare_with_gpt(task, text1, text2)
 
         # Clean up the uploaded files after processing
-        os.remove(file1_path)
-        os.remove(file2_path)
+        if file1:
+            os.remove(file1_path)
+        if file2:
+            os.remove(file2_path)
 
         return JSONResponse(content={"analysis": analysis_result}, status_code=200)
 
