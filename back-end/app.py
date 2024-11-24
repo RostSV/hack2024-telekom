@@ -37,7 +37,7 @@ def read_root():
 
 @app.post("/compare")
 async def compare_files(
-        session_id: str = Form(...),
+        # session_id: str = Form(...),
         task: str = Form(...),
         file1: UploadFile = File(None),
         file2: UploadFile = File(None)
@@ -45,8 +45,8 @@ async def compare_files(
     """
     Endpoint to compare two files (PDF, DOC, DOCX) or process a single file with a task.
     """
-    if not session_id or not task:
-        raise HTTPException(status_code=400, detail="Session ID and task must be provided.")
+    # if not session_id or not task:
+    #     raise HTTPException(status_code=400, detail="Session ID and task must be provided.")
 
     file1_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file1.filename}") if file1 else None
     file2_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file2.filename}") if file2 else None
@@ -77,17 +77,18 @@ async def compare_files(
                 text2 = extract_text_from_doc(file2_path)
 
         # Use the LLM Agent to process the task and maintain history
-        response = llm_agent.process_task(session_id, task, text1, text2)
+        response = llm_agent.process_task(1, task, text1, text2)
 
         # Clean up the uploaded files after processing
         cleanup_upload_folder()
 
         # Format the JSON response without including the history
         response_content = {
-            "task": task,
-            "file1_text": text1,
-            "file2_text": text2,
-            "analysis": response
+            # "task": task,
+            # "file1_text": text1,
+            # "file2_text": text2,
+            "analysis": response,
+            # "history": llm_agent.get_history(1)
         }
 
         return JSONResponse(content=response_content, status_code=200)

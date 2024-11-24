@@ -49,7 +49,7 @@ class LLMChatAgent:
             messages.append({"role": "user", "content": f"User's document: {file2_text}"})
 
         # Call the compare_with_gpt function (original functionality preserved)
-        response = compare_with_gpt(task, file1_text, file2_text)
+        response = compare_with_gpt(task, file1_text, file2_text, history)
 
         # Update session history
         history.append({"role": "user", "content": f"Task: {task}"})
