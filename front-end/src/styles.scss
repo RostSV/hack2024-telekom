@@ -10,10 +10,8 @@ body{
   height: 100vh;
   width: 100%;
   background-image: url("../src/assets/bg.jpeg");
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  overflow: hidden;
   display: flex;
   justify-content: center;
 
@@ -333,7 +331,10 @@ body{
   }
 }
 .chat-title {
-  padding-top: 20px;
+  margin-top: 20px;
+  padding: 5px;
+  background: white;
+  border-radius: 16px;
 
 }
 .chat-logo {
@@ -377,6 +378,7 @@ body{
 .chat-container {
   display: flex;
   flex-direction: column;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   padding-top: 20px;
@@ -386,6 +388,8 @@ body{
 }
 
 .chat-window {
+  flex: 1;
+  overflow-y: auto;
 
   header{
     position: absolute;
@@ -400,7 +404,7 @@ body{
   justify-content: flex-end;
   align-items: stretch;
   min-width: 900px;
-  min-height: 600px;
+  min-height: 430px;
   filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.3))
   drop-shadow(0 6px 10px rgba(0, 0, 0, 0.15));
   font: 400 20px Lexend, sans-serif;
@@ -408,7 +412,6 @@ body{
   background: #fff;
   padding: 20px;
   box-sizing: border-box;
-  overflow-y: auto;
 }
 
 .message-group {
@@ -418,6 +421,7 @@ body{
   overflow-y: auto;
   padding: 15px 2px;
   justify-self: flex-end;
+  max-height: 100%;
 }
 
 .assistant-message,
@@ -833,3 +837,18 @@ textarea{
     transform: rotate(360deg);
   }
 }
+
+.first-response{
+  background: #fff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.3s ease-in-out;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  margin-bottom: 30px;
+  min-width: 900px;
+  .content{
+    padding: 20px;
+  }
+}
+

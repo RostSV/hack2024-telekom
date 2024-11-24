@@ -54,7 +54,7 @@ export class MainPageComponent {
       file2: this.file2
     }
     this.isLoading = true;
-    this.service.compare(payload).subscribe(
+    this.service.compare(payload,false).subscribe(
       (response) => {
         this.isLoading = false;
         this.router.navigate(['/chat'], {state: {data: response}});

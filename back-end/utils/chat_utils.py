@@ -3,7 +3,7 @@ from config import OPENAI_API_KEY
 
 openai.api_key = OPENAI_API_KEY
 
-def compare_with_gpt(task: str, text1: str, text2: str, history : list, max_tokens: int = 200) -> str:
+def compare_with_gpt(task: str, text1: str, text2: str, history : list) -> str:
     try:
         # Constructing the chat-based messages
         if task and not text1 and not text2:
@@ -30,7 +30,6 @@ def compare_with_gpt(task: str, text1: str, text2: str, history : list, max_toke
         response = openai.ChatCompletion.create(
             model="gpt-4o",  # or "gpt-4"
             messages=messages,
-            max_tokens=max_tokens
         )
 
         # Extracting the analysis response from the model's reply
