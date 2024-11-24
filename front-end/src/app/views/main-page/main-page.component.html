@@ -47,8 +47,24 @@
           </h4>
         </div>
       </section>
-        <textarea *ngIf="steps >=2 " class="instructions" [(ngModel)]="instructions" placeholder="Type your instructions here..."></textarea>
-        <button *ngIf="steps==2" (click)="onButtonClick()" class="submit-btn">{{instructions.length > 0 ? "Submit" : "Skip"}}</button>
+        <div *ngIf="steps >=2 " class="instructions-block">
+          <textarea class="instructions" [(ngModel)]="instructions" placeholder="Type your instructions here..."></textarea>
+          <div class="helpers">
+            <div class="loadedFiles">
+              <div class="file-block">
+                <i [ngClass]="getIcon(file1?.name ? file1?.name : '')"></i>
+                <p>{{file1?.name ? file1?.name : "" | shortFile:15 }}</p>
+                <i class="fa-solid fa-xmark close-icon-main"></i>
+              </div>
+              <div class="file-block">
+                <i [ngClass]="getIcon(file2?.name ? file2?.name : '')"></i>
+                <p>{{file2?.name ? file2?.name : "" | shortFile:15 }}</p>
+                <i class="fa-solid fa-xmark close-icon-main"></i>
+              </div>
+            </div>
+            <button *ngIf="steps==2" (click)="onButtonClick()" class="submit-btn">Submit</button>
+          </div>
+        </div>
     </section>
   </main>
   <footer>

@@ -9,17 +9,18 @@ export class MainPageComponent {
   file1: File | null = null;
   file2: File | null = null;
   steps = 0;
-  instructions = " ";
+  instructions = "";
   shouldAnimate = false;
 
-  constructor(private service: RestService) {}
+  constructor(private service: RestService) {
+  }
 
   triggerFileInput(steps: any): void {
     const fileInput = document.getElementById('fileInput') as HTMLInputElement;
     const fileInput2 = document.getElementById('fileInput2') as HTMLInputElement;
     if (fileInput && steps === 1) {
       fileInput.click();
-    }else if(fileInput2){
+    } else if (fileInput2) {
       fileInput2.click();
     }
     this.shouldAnimate = false;
@@ -27,7 +28,7 @@ export class MainPageComponent {
 
   onFileSelected1(event: Event): void {
     const input: HTMLInputElement = event.target as HTMLInputElement;
-    if(!input.files) return;
+    if (!input.files) return;
     this.file1 = input?.files[0];
     this.steps++;
     this.shouldAnimate = true;
@@ -35,7 +36,7 @@ export class MainPageComponent {
 
   onFileSelected2(event: Event): void {
     const input: HTMLInputElement = event.target as HTMLInputElement;
-    if(!input.files) return;
+    if (!input.files) return;
     this.file2 = input?.files[0];
     this.steps++;
     this.shouldAnimate = true;
@@ -45,7 +46,7 @@ export class MainPageComponent {
     this.steps++;
 
     const payload = {
-      task: this.instructions,
+      task: this.instructions ? this.instructions : 'validate',
       file1: this.file1,
       file2: this.file2
     }
@@ -58,5 +59,16 @@ export class MainPageComponent {
         console.error('Comparison failed:', error);
       }
     );
+  }
+
+  getIcon(name: string | undefined) {
+    name = name ? name : '';
+    const extension = name.substring(name.lastIndexOf('.'));
+    switch (extension) {
+      case '.pdf':
+        return 'fa-regular fa-file-pdf';
+      default:
+        return 'fa-regular fa-file';
+    }
   }
 }

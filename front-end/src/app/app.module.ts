@@ -11,6 +11,7 @@ import {NgOptimizedImage} from '@angular/common';
 import { InfoBadgeComponent } from './components/info-badge/info-badge.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { ShortFilePipe } from './services/short-file.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {HttpClientModule} from '@angular/common/http';
     HeaderComponent,
     LogoComponent,
     InfoBadgeComponent,
+    ShortFilePipe,
   ],
   imports: [
     BrowserModule,
