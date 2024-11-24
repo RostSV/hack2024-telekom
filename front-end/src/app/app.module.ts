@@ -12,6 +12,7 @@ import { InfoBadgeComponent } from './components/info-badge/info-badge.component
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { ShortFilePipe } from './services/short-file.pipe';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ShortFilePipe } from './services/short-file.pipe';
     LogoComponent,
     InfoBadgeComponent,
     ShortFilePipe,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

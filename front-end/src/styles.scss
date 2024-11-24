@@ -748,7 +748,8 @@ textarea{
       font-size: 12px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: start;
+
 
       i{
         font-size: 18px;
@@ -765,5 +766,70 @@ textarea{
     color: #ff0000;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
+  }
+}
+
+@media (max-width: 991px) {
+  .steps-container {
+    flex-direction: column;
+    padding-top: 0;
+  }
+
+  .step-wrapper {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    .content-box{
+      padding: 0 20px 50px;
+      .content-box-inner{
+        margin-top: 50px;
+      }
+    }
+  }
+  .steps-container{
+    display: none;
+  }
+
+
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.spinner-container {
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spinner {
+  background-image: url("../src/assets/logo-icon.png");
+  width: 60px;
+  height: 60px;
+
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

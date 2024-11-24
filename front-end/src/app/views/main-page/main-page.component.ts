@@ -11,8 +11,10 @@ export class MainPageComponent {
   steps = 0;
   instructions = "";
   shouldAnimate = false;
+  isLoading: boolean;
 
   constructor(private service: RestService) {
+    this.isLoading = false;
   }
 
   triggerFileInput(steps: any): void {
@@ -50,13 +52,14 @@ export class MainPageComponent {
       file1: this.file1,
       file2: this.file2
     }
-    console.log(payload);
+    this.isLoading = true;
     this.service.compare(payload).subscribe(
       (response) => {
-        console.log(response);
+        this.isLoading = false;
       },
       (error) => {
         console.error('Comparison failed:', error);
+        this.isLoading = false;
       }
     );
   }

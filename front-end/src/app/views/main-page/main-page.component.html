@@ -1,4 +1,5 @@
 <app-header></app-header>
+<app-spinner [isLoading]="isLoading"></app-spinner>
 <div class="main-content">
   <header class="document-validator-header">
     <h1 class="primary-heading">
@@ -58,11 +59,11 @@
               </div>
               <div class="file-block">
                 <i [ngClass]="getIcon(file2?.name ? file2?.name : '')"></i>
-                <p>{{file2?.name ? file2?.name : "" | shortFile:15 }}</p>
+                <p>{{file2?.name ? file2?.name : "" | shortFile:10 }}</p>
                 <i class="fa-solid fa-xmark close-icon-main"></i>
               </div>
             </div>
-            <button *ngIf="steps==2" (click)="onButtonClick()" class="submit-btn">Submit</button>
+            <button *ngIf="steps >= 2" (click)="onButtonClick()" class="submit-btn">Submit</button>
           </div>
         </div>
     </section>
