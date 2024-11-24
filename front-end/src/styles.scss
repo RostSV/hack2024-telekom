@@ -628,8 +628,9 @@ textarea{
   font-size: 16px;
   font-weight: 500;
   outline: none;
-  transition: 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
   &:hover{
     background: #4F46E5;
     color: #fff;
@@ -638,6 +639,95 @@ textarea{
     background: #3d33cc;
   }
 }
+.steps-container {
+  display: flex;
+  flex-direction: row;
+  color: #3c4257;
+  align-items: center;
+  justify-content: space-between;
+  font: 500 14px Lexend, sans-serif;
+  line-height: 1;
+  padding-top: 20px;
+}
+
+.step-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+  filter: drop-shadow(0px 1px 2px rgba(55, 65, 81, 0.08));
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  padding: 18px 24px;
+}
+
+.step-image {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-position: center;
+}
+
+.step-text {
+  position: relative;
+  color: inherit;
+}
+
+.step-load {
+  color: #fff;
+  width: 225px;
+}
+
+.step-load .step-content {
+  aspect-ratio: 4.018;
+  fill: #697386;
+}
+
+.step-instruction {
+  color: #3d4eac;
+  width: 222px;
+}
+
+.step-instruction .step-content {
+  aspect-ratio: 3.964;
+  fill: #f5fbff;
+  stroke: #7dabf8;
+  stroke-width: 1px;
+  padding: 18px 29px;
+}
+
+.step-result {
+  z-index: 10;
+  width: 221px;
+}
+
+.step-result .step-content {
+  aspect-ratio: 3.946;
+  fill: #fff;
+  stroke: #c1c9d2;
+  stroke-width: 1px;
+  padding: 18px 29px;
+}
+
+.step-edit {
+  border-radius: 16px;
+  width: 207px;
+}
+
+.step-edit .step-content {
+  aspect-ratio: 3.696;
+  fill: #fff;
+  stroke: #c1c9d2;
+  stroke-width: 1px;
+  padding: 18px 29px;
+}
+
+
 
 .instructions-block{
   width: 100%;
