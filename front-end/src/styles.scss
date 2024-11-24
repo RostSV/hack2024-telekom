@@ -398,6 +398,9 @@ body{
     display: flex;
     transform: translate(-50%, 0);
   }
+  .content{
+    overflow: scroll;
+  }
 
   display: flex;
   flex-direction: column;
@@ -426,6 +429,7 @@ body{
 
 .assistant-message,
 .user-message {
+  margin: 10px 0;
   display: flex;
   gap: 5px;
   padding: 8px 5px;
