@@ -4,17 +4,12 @@
     <header><h1 class="chat-title">Chat</h1></header>
     <article class="content">
       <article class="message-group">
-        <div
-          *ngFor="let message of messages"
-          [ngClass]="{'assistant-message': message.sender === 'assistant', 'user-message': message.sender === 'user'}"
-        >
-          <span class="avatar" [ngClass]="{'assistant': message.sender === 'assistant', 'user': message.sender === 'user'}">
-            {{ message.sender === 'user' ? 'U' : 'J' }}
-          </span>
-          <p class="message-text">{{ message.text }}</p>
+        <div class="assistant-message">
+          <span class="avatar assistant">J</span>
+          <p class="message-text">So your file looks good. Do you need any other help?</p>
         </div>
       </article>
-      <form class="message-input" role="form" (ngSubmit)="sendMessage()">
+      <form class="message-input" role="form">
         <label for="messageInput" class="visually-hidden">Type your message</label>
         <input
           type="text"
@@ -22,13 +17,8 @@
           class="input-field"
           placeholder="Tell me..."
           aria-label="Type your message"
-          [(ngModel)]="newMessage"
-          name="messageInput"
-          required
         />
-        <button type="submit" class="send-button" aria-label="Send message">
-          <i class="fa-solid fa-arrow-up"></i>
-        </button>
+        <button type="submit" class="send-button" aria-label="Send message"></button>
       </form>
     </article>
   </section>

@@ -37,6 +37,7 @@ def read_root():
 
 @app.post("/compare")
 async def compare_files(
+        session_id: str = Form(...),
         task: str = Form(...),
         file1: UploadFile = File(None),
         file2: UploadFile = File(None)
@@ -83,10 +84,10 @@ async def compare_files(
 
         # Format the JSON response without including the history
         response_content = {
-#             "task": task,
-#             "file1_text": text1,
-#             "file2_text": text2,
-            "analysis": analysis_result
+            "task": task,
+            "file1_text": text1,
+            "file2_text": text2,
+            "analysis": response
         }
 
         return JSONResponse(content=response_content, status_code=200)

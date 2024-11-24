@@ -1,5 +1,5 @@
 <section class="info-container">
-  <article class="info-content" (click)="togglePopup()">
+  <article class="info-content">
     <img
       loading="lazy"
       src="https://cdn.builder.io/api/v1/image/assets/TEMP/f5764d01740c2bf8a23720b11b16b96504d48ce0ac519d8cd909b2eb479f875c?placeholderIfAbsent=true&apiKey=2d165a40f05f44189b90cfb2a5e8a7fd"
@@ -9,15 +9,3 @@
     <p class="info-text">Info</p>
   </article>
 </section>
-
-<div
-  class="popup-overlay"
-  [class.show]="isPopupVisible"
-  (click)="closePopup($event)"
->
-  <div class="popup-content">
-    <button class="close-button" (click)="togglePopup()">&times;</button>
-    <h2>Information</h2>
-    <p>This is the detailed information about the topic.</p>
-  </div>
-</div>
