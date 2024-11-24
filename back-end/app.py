@@ -78,9 +78,9 @@ async def compare_files(
 
         # Format the JSON response
         response_content = {
-            "task": task,
-            "file1_text": text1,
-            "file2_text": text2,
+#             "task": task,
+#             "file1_text": text1,
+#             "file2_text": text2,
             "analysis": analysis_result
         }
 

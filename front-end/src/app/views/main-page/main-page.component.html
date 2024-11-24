@@ -14,41 +14,66 @@
       <article class="status-bar">
         <nav class="step-navigation">
           <div class="step-indicator">
-            <div class="step">
-              <span class="step-dot"></span>
+            <div class="step active">
+              <i *ngIf="steps >= 1" class="fa-solid fa-check"></i>
+              <span class="step-dot" [ngClass]="steps < 1 ? '' : 'dot-hidden' " style="background: #4f46e5"></span>
             </div>
           </div>
-          <div class="progress-line"></div>
+          <div class="progress-line line-green"></div>
           <div class="step-indicator">
-            <div class="step">
-              <span class="step-dot"></span>
+            <div class="step" [ngClass]="steps >= 1 ? 'active' : '' ">
+              <i *ngIf="steps >= 2" class="fa-solid fa-check"></i>
+              <span class="step-dot" [ngClass]="steps < 2 ? '' : 'dot-hidden' "></span>
             </div>
           </div>
-          <div class="progress-line"></div>
+          <div class="progress-line" [ngClass]="steps >= 2 ? 'line-green' : ''"></div>
           <div class="step-indicator">
             <div class="step">
-              <span class="step-dot"></span>
+              <i *ngIf="steps == 3" class="fa-solid fa-check"></i>
+              <span class="step-dot" [ngClass]="steps < 3 ? '' : 'dot-hidden' "></span>
             </div>
           </div>
         </nav>
+
       </article>
-      <section class="content-box">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/5fe680a3be76303b367b2ec38a47334f7b2845a94079d48724e9ea88a74c8e9a?placeholderIfAbsent=true&apiKey=2d165a40f05f44189b90cfb2a5e8a7fd"
-          class="status-icon"
-          alt="Progress status indicator"
-        />
-        <h2 class="secondary-heading">
-          Drop your files here
-        </h2>
-        <h4 class="secondary-tool-tip">
-          Supported files: .pdf, .doc, .txt
-        </h4>
+      <section *ngIf="steps < 2" class="content-box" [ngClass]="shouldAnimate ? 'rotating' : ''">
+        <div *ngIf="steps < 2" class="content-box-inner">
+          <div class="add-icon" (click)="triggerFileInput(steps)" ><i class="fa-solid fa-plus"></i></div>
+          <h2 class="secondary-heading">
+            {{steps == 0 ? "Import your files here" : "Add second document"}}
+          </h2>
+          <h4 class="secondary-tool-tip">
+            Supported files: .pdf, .doc, .txt
+          </h4>
+        </div>
       </section>
+        <textarea *ngIf="steps >=2 " class="instructions" [(ngModel)]="instructions" placeholder="Type your instructions here..."></textarea>
+        <button *ngIf="steps==2" (click)="onButtonClick()" class="submit-btn">{{instructions.length > 0 ? "Submit" : "Skip"}}</button>
     </section>
   </main>
   <footer>
 
   </footer>
+</div>
+
+<div class="upload-container">
+  <input
+    type="file"
+    id="fileInput"
+    (change)="onFileSelected1($event)"
+    accept=".pdf,.doc,.docx,.txt"
+    hidden
+    required
+  />
+</div>
+
+<div class="upload-container">
+  <input
+    type="file"
+    id="fileInput2"
+    (change)="onFileSelected2($event)"
+    accept=".pdf,.doc,.docx,.txt"
+    hidden
+    required
+  />
 </div>

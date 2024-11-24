@@ -9,6 +9,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import {NgOptimizedImage} from '@angular/common';
 import { InfoBadgeComponent } from './components/info-badge/info-badge.component';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { InfoBadgeComponent } from './components/info-badge/info-badge.component
     ChatPageComponent,
     HeaderComponent,
     LogoComponent,
-    InfoBadgeComponent
+    InfoBadgeComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
