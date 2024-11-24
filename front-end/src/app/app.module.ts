@@ -24,6 +24,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     InfoBadgeComponent,
     ShortFilePipe,
     SpinnerComponent,
+    InfoBadgeComponent
   ],
   imports: [
     BrowserModule,

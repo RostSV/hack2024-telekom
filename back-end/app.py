@@ -4,6 +4,7 @@ from uuid import uuid4
 import os
 from utils.file_utils import extract_text_from_pdf, extract_text_from_docx, extract_text_from_doc, save_uploaded_file
 from utils.chat_utils import compare_with_gpt
+from llm_agent import LLMChatAgent
 
 # Create the FastAPI app
 app = FastAPI()
@@ -11,6 +12,10 @@ app = FastAPI()
 # Configure the upload folder path
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# Initialize the LLM Agent
+llm_agent = LLMChatAgent()
+
 
 def cleanup_upload_folder():
     """
@@ -24,9 +29,11 @@ def cleanup_upload_folder():
         except Exception as e:
             print(f"Failed to delete {file_path}. Reason: {e}")
 
+
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the FastAPI ChatGPT Backend!"}
+
 
 @app.post("/compare")
 async def compare_files(
@@ -36,12 +43,10 @@ async def compare_files(
 ):
     """
     Endpoint to compare two files (PDF, DOC, DOCX) or process a single file with a task.
-    Accepts a task and up to two files: 'file1' (example file), 'file2' (file to compare).
     """
-    if not file1 and not file2 and not task:
-        raise HTTPException(status_code=400, detail="At least one file or task text must be provided.")
+    if not session_id or not task:
+        raise HTTPException(status_code=400, detail="Session ID and task must be provided.")
 
-    # Generate unique filenames for the uploaded files
     file1_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file1.filename}") if file1 else None
     file2_path = os.path.join(UPLOAD_FOLDER, f"{uuid4()}_{file2.filename}") if file2 else None
 
@@ -70,13 +75,13 @@ async def compare_files(
             elif file2.filename.endswith(".doc"):
                 text2 = extract_text_from_doc(file2_path)
 
-        # Use ChatGPT to analyze the task and the provided files
-        analysis_result = compare_with_gpt(task, text1, text2)
+        # Use the LLM Agent to process the task and maintain history
+        response = llm_agent.process_task(session_id, task, text1, text2)
 
         # Clean up the uploaded files after processing
         cleanup_upload_folder()
 
-        # Format the JSON response
+        # Format the JSON response without including the history
         response_content = {
 #             "task": task,
 #             "file1_text": text1,
