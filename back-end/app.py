@@ -53,7 +53,15 @@ async def compare_files(
         if file2:
             os.remove(file2_path)
 
-        return JSONResponse(content={"analysis": analysis_result}, status_code=200)
+        # Format the JSON response
+        response_content = {
+            "task": task,
+            "file1_text": text1,
+            "file2_text": text2,
+            "analysis": analysis_result
+        }
+
+        return JSONResponse(content=response_content, status_code=200)
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing files: {e}")
