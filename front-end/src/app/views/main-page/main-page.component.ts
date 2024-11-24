@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {RestService} from '../../services/rest.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -13,7 +14,7 @@ export class MainPageComponent {
   shouldAnimate = false;
   isLoading: boolean;
 
-  constructor(private service: RestService) {
+  constructor(private service: RestService, private router: Router) {
     this.isLoading = false;
   }
 
@@ -56,6 +57,7 @@ export class MainPageComponent {
     this.service.compare(payload).subscribe(
       (response) => {
         this.isLoading = false;
+        this.router.navigate(['/chat'], {state: {data: response}});
       },
       (error) => {
         console.error('Comparison failed:', error);
