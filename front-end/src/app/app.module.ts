@@ -9,6 +9,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import {NgOptimizedImage} from '@angular/common';
 import { InfoBadgeComponent } from './components/info-badge/info-badge.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { InfoBadgeComponent } from './components/info-badge/info-badge.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
